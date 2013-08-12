@@ -53,6 +53,7 @@ public class PathIssue extends Issue {
 			while ((line = br.readLine()) != null) {
 				path += line;
 			}
+			br.close();
 			for (String badPath : badPaths) {
 				if (path.contains(badPath)) {
 					return false;
