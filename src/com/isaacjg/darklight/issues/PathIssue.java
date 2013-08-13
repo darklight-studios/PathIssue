@@ -45,25 +45,13 @@ public class PathIssue extends Issue {
 	
 	@Override
 	public boolean isFixed() {
-		try {
-			Process p = Runtime.getRuntime().exec("cmd.exe /c echo %PATH%");
-			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			String path = "";
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				path += line;
+		String path = System.getProperty("java.library.path");
+		for (String badPath : badPaths) {
+			if (path.contains(badPath)) {
+				return false;
 			}
-			br.close();
-			for (String badPath : badPaths) {
-				if (path.contains(badPath)) {
-					return false;
-				}
-			}
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
 		}
+		return true;
 	}
 
 }
