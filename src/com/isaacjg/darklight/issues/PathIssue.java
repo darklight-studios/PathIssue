@@ -46,7 +46,7 @@ public class PathIssue extends Issue {
 	@Override
 	public boolean isFixed() {
 		try {
-			Process p = Runtime.getRuntime().exec("cmd.exe \\c echo %PATH%");
+			Process p = Runtime.getRuntime().exec("cmd.exe /c echo %PATH%");
 			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String path = "";
 			String line = "";
